@@ -82,15 +82,15 @@
       <h2><span class="num">01</span>The problem</h2>
       <p class="sub">Drowsy driving is quiet. There's no warning shot — just a longer blink, then a longer one.</p>
       <div class="chain" id="chain">
-        <button class="chain-step active" data-i="0"><i>🛣️</i>Long drive</button>
+        <button class="chain-step active" data-i="0"> Long drive</button>
         <span class="arrow">→</span>
-        <button class="chain-step" data-i="1"><i>🥱</i>Tiredness</button>
+        <button class="chain-step" data-i="1"> Tiredness</button>
         <span class="arrow">→</span>
-        <button class="chain-step" data-i="2"><i>😪</i>Sleepiness</button>
+        <button class="chain-step" data-i="2"> Sleepiness</button>
         <span class="arrow">→</span>
-        <button class="chain-step" data-i="3"><i>👁️</i>Eyes closing</button>
+        <button class="chain-step" data-i="3">Eyes closing</button>
         <span class="arrow">→</span>
-        <button class="chain-step danger" data-i="4"><i>⚠️</i>Risk</button>
+        <button class="chain-step danger" data-i="4"> Risk</button>
       </div>
       <div class="card chain-detail" id="chain-detail"></div>
       <div class="grid two">
@@ -190,23 +190,23 @@
       <h2><span class="num">05</span>Detection &amp; decision logic</h2>
       <p class="sub">One signal can lie. A blink is not sleep. So the system combines several signs over time.</p>
       <div class="grid techs">
-        <div class="card tech"><i>👁️</i>
+        <div class="card tech">
           <h3>Eye closure</h3>
           <p>Is the eye closed longer than a normal blink? Measured with the <b>Eye Aspect Ratio</b>.</p>
         </div>
-        <div class="card tech"><i>👀</i>
+        <div class="card tech">
           <h3>Blink analysis</h3>
           <p>Short closures are treated as normal blinks — no false alarms.</p>
         </div>
-        <div class="card tech"><i>😮</i>
+        <div class="card tech">
           <h3>Yawning</h3>
           <p>Mouth opening is tracked with a <b>Mouth Aspect Ratio</b>.</p>
         </div>
-        <div class="card tech"><i>👤</i>
+        <div class="card tech">
           <h3>Head movement</h3>
           <p>Turn and tilt of the head is an extra sign of reduced attention.</p>
         </div>
-        <div class="card tech wide"><i>🧠</i>
+        <div class="card tech wide">
           <h3>Combined detection</h3>
           <p>Signs are weighed together, so the call is more reliable than any single signal.</p>
         </div>
@@ -217,10 +217,10 @@
         <p class="hint">p1…p6 are six landmarks around one eye. Open eye ≈ 0.3, closed eye → near 0.</p>
       </div>
       <div class="states">
-        <div class="state s-ok"><b>🟢 Normal</b><span>Blinks and normal movement. No action.</span></div>
-        <div class="state s-warn"><b>🟡 Warning</b><span>Prolonged closure, or a yawn / head sign persisting.</span>
+        <div class="state s-ok"><b> Normal</b><span>Blinks and normal movement. No action.</span></div>
+        <div class="state s-warn"><b> Warning</b><span>Prolonged closure, or a yawn / head sign persisting.</span>
         </div>
-        <div class="state s-bad"><b>🔴 Drowsy</b><span>Enough combined evidence. <b>Audio alert</b> triggers.</span>
+        <div class="state s-bad"><b> Drowsy</b><span>Enough combined evidence. <b>Audio alert</b> triggers.</span>
         </div>
       </div>
       <div class="card rules">
@@ -236,27 +236,27 @@
       <h2><span class="num">06</span>Tech stack &amp; requirements</h2>
       <div class="grid stack">
         <div class="card">
-          <h3>🐍 Python</h3>
+          <h3> Python</h3>
           <p>Main logic and camera-input processing.</p>
         </div>
         <div class="card">
-          <h3>👁️ OpenCV</h3>
+          <h3> OpenCV</h3>
           <p>Camera handling, video processing, real-time frames.</p>
         </div>
         <div class="card">
-          <h3>📍 MediaPipe</h3>
+          <h3> MediaPipe</h3>
           <p>Face and facial-landmark detection.</p>
         </div>
         <div class="card">
-          <h3>📊 NumPy</h3>
+          <h3> NumPy</h3>
           <p>Eye / mouth distance calculations.</p>
         </div>
         <div class="card">
-          <h3>🖥️ Streamlit</h3>
+          <h3> Streamlit</h3>
           <p>Simple dashboard with camera feed and status.</p>
         </div>
         <div class="card">
-          <h3>🔗 Git &amp; GitHub</h3>
+          <h3> Git &amp; GitHub</h3>
           <p>Version control and project management (VS Code to develop).</p>
         </div>
       </div>
@@ -268,16 +268,16 @@
     <section id="features" class="reveal">
       <h2><span class="num">07</span>Features, trade-offs &amp; testing</h2>
       <div class="grid feats">
-        <div class="card"><b>📷 Real-time monitoring</b></div>
-        <div class="card"><b>👁️ Eye-closure detection</b></div>
-        <div class="card"><b>🥱 Yawning detection</b></div>
-        <div class="card"><b>↔️ Head-movement analysis</b></div>
-        <div class="card"><b>⚠️ Drowsiness status</b></div>
-        <div class="card"><b>🔔 Audio warning</b></div>
+        <div class="card"><b> Real-time monitoring</b></div>
+        <div class="card"><b> Eye-closure detection</b></div>
+        <div class="card"><b> Yawning detection</b></div>
+        <div class="card"><b>↔ Head-movement analysis</b></div>
+        <div class="card"><b> Drowsiness status</b></div>
+        <div class="card"><b> Audio warning</b></div>
       </div>
       <div class="grid two">
         <div class="card good">
-          <h3>🟢 Advantages</h3>
+          <h3> Advantages</h3>
           <ul class="tick">
             <li>Continuous real-time monitoring</li>
             <li>Early warning</li>
@@ -286,7 +286,7 @@
           </ul>
         </div>
         <div class="card warn">
-          <h3>🟡 Limitations</h3>
+          <h3> Limitations</h3>
           <ul class="tick">
             <li>Low light reduces accuracy</li>
             <li>Camera must see the face</li>
@@ -295,11 +295,11 @@
           </ul>
         </div>
       </div>
-      <p class="note">⚠️ DriveGuard AI is an assistance tool. It does not replace driver attention or safe driving.</p>
+      <p class="note"> DriveGuard AI is an assistance tool. It does not replace driver attention or safe driving.</p>
       <div class="card tests">
         <h3>Testing</h3>
         <div class="test-flow"><span>Normal condition</span>→<span>Eye closure</span>→<span>Drowsiness
-            detected</span>→<span class="hot">🔔 Alert</span></div>
+            detected</span>→<span class="hot"> Alert</span></div>
         <p class="hint">Tested with a laptop webcam under normal indoor lighting: face detection, eye monitoring,
           prolonged-closure detection and audio alert all worked in real time.</p>
       </div>
@@ -309,12 +309,12 @@
     <section id="future" class="reveal">
       <h2><span class="num">08</span>Future scope</h2>
       <div class="roadmap">
-        <div class="rm"><i>🌙</i><b>Night-time detection</b><span>Better low-light performance.</span></div>
-        <div class="rm"><i>📷</i><b>IR camera support</b><span>Eyes visible in the dark.</span></div>
-        <div class="rm"><i>🧠</i><b>ML-based detection</b><span>More facial features, learned thresholds.</span></div>
-        <div class="rm"><i>📱</i><b>Mobile alerts</b><span>Notify a connected phone.</span></div>
-        <div class="rm"><i>🚗</i><b>Vehicle integration</b><span>Tie into vehicle safety systems.</span></div>
-        <div class="rm"><i>🚌</i><b>Fleet &amp; transport</b><span>Buses, trucks, commercial drivers.</span></div>
+        <div class="rm"><i></i><b>Night-time detection</b><span>Better low-light performance.</span></div>
+        <div class="rm"><i></i><b>IR camera support</b><span>Eyes visible in the dark.</span></div>
+        <div class="rm"><i></i><b>ML-based detection</b><span>More facial features, learned thresholds.</span></div>
+        <div class="rm"><i></i><b>Mobile alerts</b><span>Notify a connected phone.</span></div>
+        <div class="rm"><i></i><b>Vehicle integration</b><span>Tie into vehicle safety systems.</span></div>
+        <div class="rm"><i></i><b>Fleet &amp; transport</b><span>Buses, trucks, commercial drivers.</span></div>
       </div>
     </section>
 
@@ -323,8 +323,10 @@
       <p class="tagline">“When You Drift, We Alert.”</p>
       <p>Built by <b>Pranav Thakur</b></p>
       <div class="cta center">
-        <a class="btn" id="gh-foot" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
-        <a class="btn ghost" id="li-foot" href="#" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+        <a class="btn" id="gh-foot" href="#" target="_blank"
+          rel="noopener">https://github.com/pranavvv-git/DriveGuard-AI</a>
+        <a class="btn ghost" id="li-foot" href="#" target="_blank"
+          rel="noopener">https://www.linkedin.com/in/pranav-thakur-60a721416/</a>
       </div>
     </footer>
   </main>
