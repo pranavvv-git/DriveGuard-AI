@@ -3,6 +3,32 @@
 
 DriveGuard AI is an AI-based driver drowsiness detection and alert system built using computer vision. It analyzes eye closure, yawning, and head position to identify signs of driver fatigue and trigger alerts.
 
+### Project Screenshots
+
+Home Page
+
+![DriveGuard AI Home Page](docs/home.png.png)
+
+How It Works
+
+![How DriveGuard AI Works](docs/how%20it%20works.png.png)
+
+Problem Overview
+
+![Problem Overview](docs/problems.png.png)
+
+Live Demo
+
+![Live Demo](docs/live%20demo.png.png)
+
+Simulator
+
+![DriveGuard AI Simulator](docs/simulator.png.png)
+
+Footer
+
+![DriveGuard AI Footer](docs/footer.png.png)
+
 ## Features
 - Real-time drowsiness detection using a webcam
 - Eye closure and yawning detection
