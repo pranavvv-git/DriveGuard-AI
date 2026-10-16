@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DriveGuard AI — When You Drift, We Alert</title>
+  <meta name="description"
+    content="Real-time driver drowsiness detection with Python, OpenCV and MediaPipe. Explore how it works, play with the simulator, or try it live with your webcam.">
+  <meta property="og:title" content="DriveGuard AI — When You Drift, We Alert">
+  <meta property="og:description"
+    content="Real-time driver drowsiness detection. Interactive explainer + live webcam demo.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <header class="nav">
+    <a class="brand" href="#top"><span class="dot"></span>DriveGuard AI</a>
+    <nav>
+      <a href="#problem">Problem</a>
+      <a href="#how">How it works</a>
+      <a href="#simulator">Simulator</a>
+      <a href="#live">Live demo</a>
+      <a href="#logic">Logic</a>
+      <a href="#stack">Stack</a>
+      <a href="#future">Future</a>
+    </nav>
+    <a class="btn small" id="gh-nav" href="#" target="_blank" rel="noopener">GitHub ↗</a>
+  </header>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">AI-based driver drowsiness detection &amp; alert system</p>
+        <h1>When you <span class="drift">drift</span>,<br>we <span class="alert-word">alert</span>.</h1>
+        <p class="lead">A real-time computer-vision system that watches the driver's eyes, mouth and head through an
+          ordinary webcam — and warns them <em>before</em> sleepiness becomes a crash.</p>
+        <div class="cta">
+          <a class="btn" href="#live">Try the live demo</a>
+          <a class="btn ghost" href="#simulator">Play with the simulator</a>
+        </div>
+        <ul class="meta">
+          <li>Python</li>
+          <li>OpenCV</li>
+          <li>MediaPipe</li>
+          <li>NumPy</li>
+          <li>Streamlit</li>
+        </ul>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 300 140" class="eye-svg" id="hero-eye">
+          <defs>
+            <clipPath id="hero-clip">
+              <path id="hero-clip-path" d="" />
+            </clipPath>
+          </defs>
+          <path id="hero-outline" class="eye-outline" d="" />
+          <g clip-path="url(#hero-clip)">
+            <rect x="0" y="0" width="300" height="140" class="eye-white" />
+            <circle cx="150" cy="70" r="40" class="iris" />
+            <circle cx="150" cy="70" r="18" class="pupil" />
+            <circle cx="140" cy="60" r="6" class="glint" />
+          </g>
+        </svg>
+        <div class="hero-status" id="hero-status"><span class="led"></span><b>NORMAL</b></div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section id="problem" class="reveal">
+      <h2><span class="num">01</span>The problem</h2>
+      <p class="sub">Drowsy driving is quiet. There's no warning shot — just a longer blink, then a longer one.</p>
+      <div class="chain" id="chain">
+        <button class="chain-step active" data-i="0"><i>🛣️</i>Long drive</button>
+        <span class="arrow">→</span>
+        <button class="chain-step" data-i="1"><i>🥱</i>Tiredness</button>
+        <span class="arrow">→</span>
+        <button class="chain-step" data-i="2"><i>😪</i>Sleepiness</button>
+        <span class="arrow">→</span>
+        <button class="chain-step" data-i="3"><i>👁️</i>Eyes closing</button>
+        <span class="arrow">→</span>
+        <button class="chain-step danger" data-i="4"><i>⚠️</i>Risk</button>
+      </div>
+      <div class="card chain-detail" id="chain-detail"></div>
+      <div class="grid two">
+        <div class="card">
+          <h3>Objective</h3>
+          <ul class="tick">
+            <li><b>Detect</b> early signs of drowsiness from eyes, face and head.</li>
+            <li><b>Monitor</b> the driver continuously through a camera.</li>
+            <li><b>Alert</b> early, on prolonged eye closure or combined signs.</li>
+            <li><b>Reduce risk</b> by making the driver aware before control is affected.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Our solution</h3>
+          <p>A camera watches the driver's face. Eye closure, blinking, yawning and head movement are measured every
+            frame. If the signs persist, the system flags a possible drowsy state and plays an audio alert.</p>
+          <p class="mono flowline">Camera → Face → Eyes → Check → Alert</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section id="how" class="reveal">
+      <h2><span class="num">02</span>How it works</h2>
+      <p class="sub">Six stages, every frame, in real time. Click a stage — or just watch the signal travel.</p>
+      <div class="pipeline" id="pipeline"></div>
+      <div class="card pipe-detail" id="pipe-detail"></div>
+    </section>
+
+    <!-- SIMULATOR -->
+    <section id="simulator" class="reveal">
+      <h2><span class="num">03</span>Simulator</h2>
+      <p class="sub">No camera needed. Drag the slider to open and close the eye, trigger a blink or a microsleep, and
+        watch the decision logic react.</p>
+      <div class="sim">
+        <div class="sim-left card">
+          <svg viewBox="0 0 300 140" class="eye-svg big" id="sim-eye">
+            <defs>
+              <clipPath id="sim-clip">
+                <path id="sim-clip-path" d="" />
+              </clipPath>
+            </defs>
+            <path id="sim-outline" class="eye-outline" d="" />
+            <g clip-path="url(#sim-clip)">
+              <rect x="0" y="0" width="300" height="140" class="eye-white" />
+              <circle cx="150" cy="70" r="40" class="iris" />
+              <circle cx="150" cy="70" r="18" class="pupil" />
+              <circle cx="140" cy="60" r="6" class="glint" />
+            </g>
+          </svg>
+          <label class="slider">
+            <span>Eye openness · <b class="mono" id="sim-ear-val">0.32</b> <small>(EAR)</small></span>
+            <input type="range" id="sim-ear" min="0.08" max="0.40" step="0.005" value="0.32">
+          </label>
+          <div class="btn-row">
+            <button class="btn small ghost" id="sim-blink">Normal blink</button>
+            <button class="btn small ghost" id="sim-micro">Microsleep (2 s)</button>
+          </div>
+          <div class="btn-row checks">
+            <label><input type="checkbox" id="sim-yawn"> Yawning</label>
+            <label><input type="checkbox" id="sim-head"> Head turned / tilted</label>
+          </div>
+          <canvas id="sim-chart" width="640" height="150" aria-label="EAR over the last 8 seconds"></canvas>
+          <p class="hint">Chart: eye openness over the last 8 s. Dashed line = closed-eye threshold.</p>
+        </div>
+        <div class="sim-right" id="sim-dash"></div>
+      </div>
+    </section>
+
+    <!-- LIVE -->
+    <section id="live" class="reveal">
+      <h2><span class="num">04</span>Live demo <small class="tag">runs in your browser</small></h2>
+      <p class="sub">The same logic, driven by your real face. Face landmarks are computed locally with MediaPipe —
+        video is never uploaded anywhere.</p>
+      <div class="sim">
+        <div class="card live-box">
+          <div class="video-wrap" id="video-wrap">
+            <video id="cam" playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            <div class="video-msg" id="video-msg">Camera is off</div>
+            <div class="video-badge" id="video-badge" hidden>NORMAL</div>
+          </div>
+          <div class="btn-row">
+            <button class="btn" id="cam-start">Start camera</button>
+            <button class="btn ghost" id="cam-stop" hidden>Stop</button>
+            <button class="btn ghost small" id="sound-toggle">🔇 Sound off</button>
+          </div>
+          <p class="hint" id="cam-hint">Tip: face the camera in good light. Close your eyes for ~1 second to see the
+            alert.</p>
+        </div>
+        <div class="sim-right" id="live-dash"></div>
+      </div>
+    </section>
+
+    <!-- DETECTION + LOGIC -->
+    <section id="logic" class="reveal">
+      <h2><span class="num">05</span>Detection &amp; decision logic</h2>
+      <p class="sub">One signal can lie. A blink is not sleep. So the system combines several signs over time.</p>
+      <div class="grid techs">
+        <div class="card tech"><i>👁️</i>
+          <h3>Eye closure</h3>
+          <p>Is the eye closed longer than a normal blink? Measured with the <b>Eye Aspect Ratio</b>.</p>
+        </div>
+        <div class="card tech"><i>👀</i>
+          <h3>Blink analysis</h3>
+          <p>Short closures are treated as normal blinks — no false alarms.</p>
+        </div>
+        <div class="card tech"><i>😮</i>
+          <h3>Yawning</h3>
+          <p>Mouth opening is tracked with a <b>Mouth Aspect Ratio</b>.</p>
+        </div>
+        <div class="card tech"><i>👤</i>
+          <h3>Head movement</h3>
+          <p>Turn and tilt of the head is an extra sign of reduced attention.</p>
+        </div>
+        <div class="card tech wide"><i>🧠</i>
+          <h3>Combined detection</h3>
+          <p>Signs are weighed together, so the call is more reliable than any single signal.</p>
+        </div>
+      </div>
+      <div class="card formula">
+        <h3>The core formula</h3>
+        <p class="mono big-formula">EAR = ( ‖p2 − p6‖ + ‖p3 − p5‖ ) / ( 2 · ‖p1 − p4‖ )</p>
+        <p class="hint">p1…p6 are six landmarks around one eye. Open eye ≈ 0.3, closed eye → near 0.</p>
+      </div>
+      <div class="states">
+        <div class="state s-ok"><b>🟢 Normal</b><span>Blinks and normal movement. No action.</span></div>
+        <div class="state s-warn"><b>🟡 Warning</b><span>Prolonged closure, or a yawn / head sign persisting.</span>
+        </div>
+        <div class="state s-bad"><b>🔴 Drowsy</b><span>Enough combined evidence. <b>Audio alert</b> triggers.</span>
+        </div>
+      </div>
+      <div class="card rules">
+        <h3>Illustrative thresholds used in this page</h3>
+        <div class="mono rule-grid" id="rule-grid"></div>
+        <p class="hint">Tuned for this web demo. The Python prototype's exact values can differ; all of these are easy
+          to adjust in <code>script.js</code>.</p>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" class="reveal">
+      <h2><span class="num">06</span>Tech stack &amp; requirements</h2>
+      <div class="grid stack">
+        <div class="card">
+          <h3>🐍 Python</h3>
+          <p>Main logic and camera-input processing.</p>
+        </div>
+        <div class="card">
+          <h3>👁️ OpenCV</h3>
+          <p>Camera handling, video processing, real-time frames.</p>
+        </div>
+        <div class="card">
+          <h3>📍 MediaPipe</h3>
+          <p>Face and facial-landmark detection.</p>
+        </div>
+        <div class="card">
+          <h3>📊 NumPy</h3>
+          <p>Eye / mouth distance calculations.</p>
+        </div>
+        <div class="card">
+          <h3>🖥️ Streamlit</h3>
+          <p>Simple dashboard with camera feed and status.</p>
+        </div>
+        <div class="card">
+          <h3>🔗 Git &amp; GitHub</h3>
+          <p>Version control and project management (VS Code to develop).</p>
+        </div>
+      </div>
+      <div class="card minimal"><b>Minimum setup:</b> <span class="mono">Laptop + Webcam + Speaker → complete working
+          prototype.</span> No extra hardware.</div>
+    </section>
+
+    <!-- FEATURES / PROS CONS / TESTING -->
+    <section id="features" class="reveal">
+      <h2><span class="num">07</span>Features, trade-offs &amp; testing</h2>
+      <div class="grid feats">
+        <div class="card"><b>📷 Real-time monitoring</b></div>
+        <div class="card"><b>👁️ Eye-closure detection</b></div>
+        <div class="card"><b>🥱 Yawning detection</b></div>
+        <div class="card"><b>↔️ Head-movement analysis</b></div>
+        <div class="card"><b>⚠️ Drowsiness status</b></div>
+        <div class="card"><b>🔔 Audio warning</b></div>
+      </div>
+      <div class="grid two">
+        <div class="card good">
+          <h3>🟢 Advantages</h3>
+          <ul class="tick">
+            <li>Continuous real-time monitoring</li>
+            <li>Early warning</li>
+            <li>Simple setup, no extra hardware</li>
+            <li>Easy to use</li>
+          </ul>
+        </div>
+        <div class="card warn">
+          <h3>🟡 Limitations</h3>
+          <ul class="tick">
+            <li>Low light reduces accuracy</li>
+            <li>Camera must see the face</li>
+            <li>Sunglasses / face covering hide the eyes</li>
+            <li>Blink patterns differ between people</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">⚠️ DriveGuard AI is an assistance tool. It does not replace driver attention or safe driving.</p>
+      <div class="card tests">
+        <h3>Testing</h3>
+        <div class="test-flow"><span>Normal condition</span>→<span>Eye closure</span>→<span>Drowsiness
+            detected</span>→<span class="hot">🔔 Alert</span></div>
+        <p class="hint">Tested with a laptop webcam under normal indoor lighting: face detection, eye monitoring,
+          prolonged-closure detection and audio alert all worked in real time.</p>
+      </div>
+    </section>
+
+    <!-- FUTURE -->
+    <section id="future" class="reveal">
+      <h2><span class="num">08</span>Future scope</h2>
+      <div class="roadmap">
+        <div class="rm"><i>🌙</i><b>Night-time detection</b><span>Better low-light performance.</span></div>
+        <div class="rm"><i>📷</i><b>IR camera support</b><span>Eyes visible in the dark.</span></div>
+        <div class="rm"><i>🧠</i><b>ML-based detection</b><span>More facial features, learned thresholds.</span></div>
+        <div class="rm"><i>📱</i><b>Mobile alerts</b><span>Notify a connected phone.</span></div>
+        <div class="rm"><i>🚗</i><b>Vehicle integration</b><span>Tie into vehicle safety systems.</span></div>
+        <div class="rm"><i>🚌</i><b>Fleet &amp; transport</b><span>Buses, trucks, commercial drivers.</span></div>
+      </div>
+    </section>
+
+    <footer class="reveal">
+      <h2>Thank you</h2>
+      <p class="tagline">“When You Drift, We Alert.”</p>
+      <p>Built by <b>Pranav Thakur</b></p>
+      <div class="cta center">
+        <a class="btn" id="gh-foot" href="#" target="_blank" rel="noopener">View on GitHub ↗</a>
+        <a class="btn ghost" id="li-foot" href="#" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
