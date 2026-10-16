@@ -1,8 +1,8 @@
 /* DriveGuard AI — interactive explainer
  * Edit CONFIG below with your own links. */
 const CONFIG = {
-  githubUrl:   "https://github.com/YOUR-USERNAME/YOUR-REPO",
-  linkedinUrl: "https://www.linkedin.com/in/YOUR-PROFILE",
+  githubUrl:   "https://github.com/pranavvv-git/DriveGuard-AI",
+  linkedinUrl: "https://www.linkedin.com/in/pranav-thakur-60a721416/",
 };
 
 /* Illustrative thresholds for this web demo (tune freely) */
