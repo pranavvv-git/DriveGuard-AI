@@ -40,7 +40,7 @@ Python, OpenCV, MediaPipe, NumPy, Streamlit, HTML, CSS, JavaScript
 ```bash
 git clone https://github.com/pranavvv-git/DriveGuard-AI.git
 cd DriveGuard-AI
-python -m http.server 8000
+http://localhost:8000
 ```
 
 Open `http://localhost:8000` in your browser.
