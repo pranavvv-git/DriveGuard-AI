@@ -25,11 +25,6 @@ Simulator
 
 ![DriveGuard AI Simulator](docs/simulator.png.png)
 
-Fotter
-
-![DriveGuard AI Footer](docs/footer.png.png)
-
-
 ## Features
 - Real-time drowsiness detection using a webcam
 - Eye closure and yawning detection
